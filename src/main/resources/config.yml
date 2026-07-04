@@ -1,0 +1,27 @@
+lang: "en"
+bot-token: "YOUR_BOT_TOKEN"
+channel-id: "YOUR_CHANNEL_ID"
+
+settings:
+  log-chat: true
+  log-join: true
+  log-quit: true
+  log-suspicious: true
+
+punishments:
+  auto-punish: false
+  mute-cmd: "mute %player% %duration% %reason%"
+  ban-cmd: "ban %player% %duration% %reason%"
+  mute-time: "1h"
+  mute-reason: "Chat violation"
+  ban-time: "perm"
+  ban-reason: "Suspicious activity"
+
+filters:
+  banned-words:
+    - "hack"
+    - "cheat"
+  suspicious-commands:
+    - "/op"
+    - "/gamemode"
+    - "/stop"

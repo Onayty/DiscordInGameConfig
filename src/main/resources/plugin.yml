@@ -1,0 +1,8 @@
+name: DiscordInGameConfig
+version: 1.0.0
+main: pro.plugin.discordingameconfig.DiscordInGameConfig
+api-version: '1.21'
+commands:
+  discordconfig:
+    aliases: [dcconfig, dcc]
+    permission: discordinlet.admin
