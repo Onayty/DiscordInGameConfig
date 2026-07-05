@@ -1,22 +1,12 @@
 package pro.plugin.discordingameconfig.utils;
 
-import net.md_5.bungee.api.ChatColor;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 public class ColorUtil {
-    public static String color(String text) {
-        if (text == null) return "";
-        Matcher matcher = Pattern.compile("&#[a-fA-F0-9]{6}").matcher(text);
-        while (matcher.find()) {
-            String hexCode = text.substring(matcher.start(), matcher.end());
-            String replaceSharp = hexCode.replace("&#", "x");
-            char[] ch = replaceSharp.toCharArray();
-            StringBuilder builder = new StringBuilder();
-            for (char c : ch) builder.append("&").append(c);
-            text = text.replace(hexCode, builder.toString());
-            matcher = Pattern.compile("&#[a-fA-F0-9]{6}").matcher(text);
-        }
-        return ChatColor.translateAlternateColorCodes('&', text);
+    private static final LegacyComponentSerializer SERIALIZER = LegacyComponentSerializer.builder().character('&').hexColors().useUnusualXRepeatedCharacterHexFormat().build();
+    public static Component color(String text) {
+        return text == null ? Component.empty() : SERIALIZER.deserialize(text).decoration(TextDecoration.ITALIC, false);
     }
 }

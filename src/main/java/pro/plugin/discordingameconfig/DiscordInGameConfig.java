@@ -7,6 +7,7 @@ import pro.plugin.discordingameconfig.listeners.GameListener;
 import pro.plugin.discordingameconfig.listeners.MenuListener;
 import pro.plugin.discordingameconfig.managers.ConfigManager;
 import pro.plugin.discordingameconfig.managers.DiscordManager;
+import pro.plugin.discordingameconfig.managers.PacketManager;
 
 public final class DiscordInGameConfig extends JavaPlugin {
     private static DiscordInGameConfig instance;
@@ -16,6 +17,7 @@ public final class DiscordInGameConfig extends JavaPlugin {
         instance = this;
         ConfigManager.init(this);
         DiscordManager.init();
+        try { PacketManager.register(this); } catch (Exception ignored) {}
 
         getCommand("discordconfig").setExecutor(new DiscordConfigCommand());
         Bukkit.getPluginManager().registerEvents(new GameListener(), this);
@@ -23,9 +25,7 @@ public final class DiscordInGameConfig extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
-        DiscordManager.shutdown();
-    }
+    public void onDisable() { DiscordManager.shutdown(); }
 
     public static DiscordInGameConfig getInstance() { return instance; }
 }
